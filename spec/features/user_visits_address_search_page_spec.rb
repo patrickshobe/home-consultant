@@ -2,21 +2,55 @@ require 'rails_helper'
 
 
 describe "user visits address search page" do
-  it "finds property " do
-
+  it 'user can see address search page' do
     allow_any_instance_of(ApplicationController).to receive(:auth_token).and_return("this_is_a_very_simple_auth_token_string")
-    #     As an authenticated user I visit the address search page
+
     visit "/search/new"
 
-    # When I type in a nil address and click search
-    fill_in 'address', with: ""
-    click_on "Find Location"
+    expect(page).to have_content('Pricing Location Address')
+    expect(page).to have_content('Location Address')
+    expect(page).to have_button('Find Location')
+  end
+  it "user types leaves address empty " do
 
-    # I am redirected back to the search page with an error message “Address Empty.”
+    allow_any_instance_of(ApplicationController).to receive(:auth_token).and_return("this_is_a_very_simple_auth_token_string")
+
+    visit "/search/new"
+
+    fill_in 'address', with: ""
+
+    VCR.use_cassette('empty address input') do
+      click_on "Find Location"
+    end
+
     expect(current_path).to eq(new_search_path)
     expect(page).to have_content("Address Empty.")
-    # save_and_open_page
   end
+  it "user types invalid address" do
+    allow_any_instance_of(ApplicationController).to receive(:auth_token).and_return("this_is_a_very_simple_auth_token_string")
 
+    visit "/search/new"
 
+    fill_in 'address', with: "123 Bad Address St. "
+
+    VCR.use_cassette('invalid address input') do
+      click_on "Find Location"
+    end
+
+    expect(current_path).to eq(new_search_path)
+    expect(page).to have_content("Address Not Found")
+  end
+  it "user types valid address" do
+    allow_any_instance_of(ApplicationController).to receive(:auth_token).and_return("this_is_a_very_simple_auth_token_string")
+
+    visit "/search/new"
+
+    fill_in 'address', with: "1860 South Marion Street"
+
+    VCR.use_cassette('valid address input') do
+      click_on "Find Location"
+    end
+
+    expect(current_path).to eq('/main_page')
+  end
 end
