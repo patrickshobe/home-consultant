@@ -2,7 +2,7 @@ require 'rails_helper'
 
 
 describe "user visits address search page" do
-  it 'user can see address search page' do
+  xit 'user can see address search page' do
     allow_any_instance_of(ApplicationController).to receive(:auth_token).and_return("this_is_a_very_simple_auth_token_string")
 
     visit "/search/new"
@@ -11,7 +11,7 @@ describe "user visits address search page" do
     expect(page).to have_content('Location Address')
     expect(page).to have_button('Find Location')
   end
-  it "user types leaves address empty " do
+  xit "user types leaves address empty " do
 
     allow_any_instance_of(ApplicationController).to receive(:auth_token).and_return("this_is_a_very_simple_auth_token_string")
 
@@ -26,7 +26,7 @@ describe "user visits address search page" do
     expect(current_path).to eq(new_search_path)
     expect(page).to have_content("Address Empty.")
   end
-  it "user types invalid address" do
+  xit "user types invalid address" do
     allow_any_instance_of(ApplicationController).to receive(:auth_token).and_return("this_is_a_very_simple_auth_token_string")
 
     visit "/search/new"
@@ -40,7 +40,7 @@ describe "user visits address search page" do
     expect(current_path).to eq(new_search_path)
     expect(page).to have_content("Address Not Found")
   end
-  it "user types valid address" do
+  xit "user types valid address" do
     allow_any_instance_of(ApplicationController).to receive(:auth_token).and_return("this_is_a_very_simple_auth_token_string")
 
     visit "/search/new"
