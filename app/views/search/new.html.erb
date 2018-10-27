@@ -1,8 +1,7 @@
 <h1>Pricing Location Address</h1>
-
 <%= form_tag("/search", method: "post") do %>
   <%= label_tag(:location_address, "Location Address") %>
   <%= text_field_tag(:address) %>
-  
+
   <%= submit_tag("Find Location") %>
 <% end %>
