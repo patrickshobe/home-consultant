@@ -1,48 +1,108 @@
-<h1>Address</h1>
+<div class="find-section">
+  <div class="address_preparation container-fluid">
+    <div class="header-text">
+      <h3><b>Client Details</b></h3>
+    </div>
+    <div class="field_headers">
+      <p class="client-name">Name: <%= @property_facade.name %></p>
+      <p class="client-email">Email: <%= @property_facade.email  %> </p>
+      <p class="client-phone">Phone: <%= @property_facade.phone  %> </p>
+      <p class="client-opted-in">Opted In: <%= @property_facade.opted_in %> </p>
+      <p class="client-found-us">Found Us: <%= @property_facade.found_us %> </p>
+      <p class="client-map">Map: <a href="<%= @property_facade.map %>">Click for Directions to Property</a> </p>
+    </div>
+  </div>
 
-<div class="address_preparation">
-<h2 class="field_headers">Name: <%= @property_facade.name %></h2>
-<h2 class="field_headers">Email: <%= @property_facade.email  %> </h2>
-<h2 class="field_headers">Phone: <%= @property_facade.phone  %> </h2>
-<h2 class="field_headers">Map: <a href="<%= @property_facade.map %>">Click for Directions to Property</a> </h2>
-<h2 class="field_headers">Opted In: <%= @property_facade.opted_in %> </h2>
-<h2 class="field_headers">Found Us: <%= @property_facade.found_us %> </h2>
-<h2 class="field_headers">Estimate: </h2>
-<h3 class="estimate_header">Zillow</h3>
-<h3 class="estimates">Zestimate: <%= @property_facade.zestimate %> </h3>
-<h3 class="estimates">Low: <%= @property_facade.z_low %> </h3>
-<h3 class="estimates">High: <%= @property_facade.z_high %> </h3>
-<h3 class="estimate_header">Home Junction</h3>
-<h3 class="estimates">Low: <%= @property_facade.hj_low %> </h3>
-<h3 class="estimates">High: <%= @property_facade.hj_high %> </h3>
-<h3 class="estimates">Regional Avg: <%= @property_facade.hj_avg %> </h3>
-<h2 class="field_headers">Enthusiasm: <%= @property_facade.enthusiasm %> </h2>
-<h2 class="field_headers">Timing: <%= @property_facade.timing %> </h2>
-<h2 class="field_headers">Adopter Type: <%= @property_facade.adopter_type %> </h2>
-<h2 class="field_headers">Updates: <% @property_facade.updates.each do |update| %> </h2>
-  <h3 class="update"> <%= update %> </h3>
-<% end %>
-<h2 class="field_headers">Stage: <%= @property_facade.stage %> </h2>
-<h2 class="field_headers">Retainer: <%= @property_facade.retainer %> </h2>
+  <div class="estimate-types container-fluid">
+    <div class="header-text">
+      <h3 class="field_headers"><b>Estimates</b></h3>
+    </div>
+    <div class="zillow-block">
+      <h4 class="estimate_header">Zillow</h4>
+      <p class="estimates">Zestimate: <%= @property_facade.zestimate %> </p>
+      <p class="estimates">Low: <%= @property_facade.z_low %> </p>
+      <p class="estimates">High: <%= @property_facade.z_high %> </p>
+    </div>
+    <div class="home-junction-block">
+      <h4 class="estimate_header">Home Junction</h4>
+      <p class="estimates">Low: <%= @property_facade.hj_low %> </p>
+      <p class="estimates">High: <%= @property_facade.hj_high %> </p>
+      <p class="estimates">Regional Avg: <%= @property_facade.hj_avg %> </p>
+    </div>
+  </div>
+
+  <div class="client-partnership-indicators container-fluid">
+    <div class="header-text">
+      <h3><b>Client Partnership Indicators</b></h3>
+    </div>
+    <div class="indicator-details">
+      <p class="client-enthusiasm">Enthusiasm: <%= @property_facade.enthusiasm %> </p>
+      <p class="client-timing">Timing: <%= @property_facade.timing %> </p>
+      <p class="client-adopter">Adopter Type: <%= @property_facade.adopter_type %> </p>
+      <p class="client-stage">Stage: <%= @property_facade.stage %> </p>
+      <p class="client-retainer">Retainer: <%= @property_facade.retainer %> </p>
+    </div>
+  </div>
+
+  <div class="client-updates container-fluid">
+    <div class="header-text">
+      <h3><b>Client Updates</b></h3>
+    </div>
+    <div class="update-list">
+      <% @property_facade.updates.each do |update| %>
+        <ul>
+          <p class="update"> <%= update %> </p>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Button trigger modal -->
+  <div class="button-spacing">
+    <button type="button" class="start-button" data-toggle="modal" data-target="#exampleModalLong">
+      Start Consultation
+    </button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Consultation Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_tag("/main_page", method: "post") do %>
+          <%= label_tag(:about_the_home, "About the Home") %>
+          <%= text_area_tag(:about) %>
+          <%= label_tag(:recommended_price, "Recommended List Price") %>
+          <%= text_field_tag(:recommended_price) %>
+          <%= label_tag(:update_enthusiasm, "Update Client Enthusiasm") %>
+          <%= select_tag(:opciones, options_for_select([['mild', 1], ['medium', 2], ['spicy', 3]]))%>
+          <%= label_tag(:buyer_agent_comm, "Buyer Agent Commission") %>
+          <%= text_field_tag(:commission) %>
+          <%= label_tag(:about_the_seller, "About the Seller") %>
+          <%= text_area_tag(:about_seller) %>
+          <%= label_tag(:credit_number, "Credit Card Number") %>
+          <%= password_field_tag(:cc_number) %>
+          <%= label_tag(:credit_expiration, "Credit Card Expiration Date") %>
+          <%= month_field(:cc_expiration_month, :cc_expires_year) %>
+          <%= hidden_field_tag(:attributes, "#{@property_facade.attributes}") %>
+          <%= submit_tag("Finish") %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="collect_form">
-<%= form_tag("/main_page", method: "post") do %>
-  <%= label_tag(:about_the_home, "About the Home") %>
-  <%= text_area_tag(:about_this_home) %>
-  <%= label_tag(:recommended_price, "Recommended List Price") %>
-  <%= text_field_tag(:price) %>
-  <%= label_tag(:update_enthusiasm, "Update Client Enthusiasm") %>
-  <%= select_tag(:client_enthusiasm, options_for_select([['mild', 1], ['medium', 2], ['spicy', 3]]))%>
-  <%= label_tag(:buyer_agent_comm, "Buyer Agent Commission") %>
-  <%= text_field_tag(:commission) %>
-  <%= label_tag(:about_seller, "About the Seller") %>
-  <%= text_area_tag(:about_the_seller) %>
-  <%= label_tag(:credit_number, "Credit Card Number") %>
-  <%= password_field_tag(:credit_card) %>
-  <%= label_tag(:credit_expiration, "Credit Card Expiration Date") %>
-  <%= month_field(:exp_date, :exp_date_2) %>
-  <%= hidden_field_tag(:attributes, "#{@property_facade.attributes}") %>
-  <%= submit_tag("Finish") %>
-<% end %>
+
 </div>
