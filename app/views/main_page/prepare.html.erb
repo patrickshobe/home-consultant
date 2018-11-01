@@ -59,10 +59,17 @@
 
   <!-- Button trigger modal -->
   <div class="button-spacing">
-    <button type="button" class="start-button" data-toggle="modal" data-target="#exampleModalLong">
+    <button type="button" id="start_timer" class="start-button" data-toggle="modal" data-target="#exampleModalLong" onclick="startTimer()">
       Start Consultation
     </button>
   </div>
+</div>
+<div class="header-text">
+  <h3>Time With Client</h3>
+</div>
+<div class='text-center'>
+  <span id="minutes">0</span> minute
+  <span id="seconds">0</span> seconds
 </div>
 
 <!-- Modal -->
@@ -96,7 +103,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" id="start_timer" class="btn btn-primary" onclick="stopTimer()">Save changes</button>
       </div>
     </div>
   </div>
@@ -105,3 +112,24 @@
 <div class="collect_form">
 
 </div>
+
+<script type="text/javascript">
+activateButtons(false, true);
+function startTimer() {
+  var seconds = 0;
+  timer = setInterval(function() {
+    seconds ++;
+    document.getElementById("seconds").innerText = seconds % 60;
+    document.getElementById("minutes").innerText = parseInt(seconds / 60);
+    activateButtons(true, false);
+  }, 1000);
+}
+function stopTimer() {
+  clearInterval(timer);
+  activateButtons(false, true);
+}
+function activateButtons(start, stop) {
+  document.getElementById("start-button").disabled = start;
+  document.getElementById("stop-button").disabled = stop;
+}
+</script>
