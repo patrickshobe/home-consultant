@@ -10,7 +10,7 @@ class TreloraApiInterface
   private
 
   def conn
-    Faraday.new(:url => 'https://www.trylora.com/')
+    Faraday.new(url: ENV['TRELORA_PATH'])
   end
 
   def build_endpoint

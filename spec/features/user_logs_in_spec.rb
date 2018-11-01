@@ -13,8 +13,8 @@ describe 'user visits log in page' do
   it "can log in a user with a correct password" do
     visit '/'
 
-    fill_in 'user[address]', with: 'steven@trel.co'
-    fill_in 'password', with: 'password'
+    fill_in 'user[address]', with: ENV['TRELORA_EMAIL']
+    fill_in 'password', with: ENV['TRELORA_PASSWORD']
 
     VCR.use_cassette('valid login') do
       click_on 'Log in'
@@ -28,7 +28,7 @@ describe 'user visits log in page' do
   it 'cannot log in a user with invalid password' do
     visit '/'
 
-    fill_in 'user[address]', with: 'steven@trel.co'
+    fill_in 'user[address]', with: ENV['TRELORA_EMAIL']
     fill_in 'password', with: ''
 
     VCR.use_cassette('user_without_password') do
@@ -49,7 +49,7 @@ describe 'user visits log in page' do
     visit '/'
 
     fill_in 'user[address]', with: 'steven'
-    fill_in 'password', with: 'password'
+    fill_in 'password', with: ENV['TRELORA_PASSWORD']
 
     VCR.use_cassette('user_without_email') do
       click_on 'Log in'

@@ -4,7 +4,7 @@ describe 'Property Service' do
   it 'should find a property by address' do
     VCR.use_cassette('property_service_post') do
       address = '1860_south_marion_street-Denver-CO-80210'
-      auth_token = 'this_is_a_very_simple_auth_token_string'
+      auth_token = ENV['TRELORA_TOKEN']
 
       property_service = PropertyService.new( address, auth_token )
 

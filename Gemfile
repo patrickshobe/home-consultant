@@ -39,6 +39,7 @@ gem 'faraday'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'StreetAddress', :require => "street_address"
+gem 'newrelic_rpm'
 
 
 group :development, :test do

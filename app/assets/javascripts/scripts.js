@@ -1,3 +1,7 @@
+//
+// Validation Functions for Log In Page
+//
+
 $(document).ready(function() {
   $('.log-in-submit').on('click', function () {
     var emailInputElement = $('#user_address')
@@ -42,6 +46,31 @@ $(document).ready(function() {
       setInvalidCSS(passwordInputElement)
       setMessage(invalidPasswordMessage)
       event.preventDefault();
+    } else {}
+  });
+});
+
+//
+// Validation Functions for Address Search Page
+//
+
+$(document).ready(function() {
+  $('.find-location-button').on('click', function () {
+    var addressInputElement = $('#address')
+
+    const invalidAddressMessage = "Cannot search with an empty address field."
+
+    function setInvalidCSS(element) {
+      $(element).css({"border-color": "red"})
+    }
+
+    function setMessage(message) {
+      $('.message').text(message);
+    }
+     if (addressInputElement.val() === '') {
+     setInvalidCSS(addressInputElement)
+     setMessage(invalidAddressMessage)
+     event.preventDefault();
     } else {}
   });
 });

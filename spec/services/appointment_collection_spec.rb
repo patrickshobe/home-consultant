@@ -13,8 +13,8 @@ describe 'Appointment Collection Service' do
         exp_date:           '01/18' } }
 
       collector = AppointmentCollector.new(params,
-                                           'this_is_a_very_simple_auth_token_string',
-                                           'steven@trel.co')
+                                           ENV['TRELORA_TOKEN'],
+                                           ENV['TRELORA_EMAIL'])
 
 
       expect(collector.about_this_home).to eq(params[:consultation][:about_this_home])

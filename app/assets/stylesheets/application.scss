@@ -46,7 +46,6 @@ html, body {
 }
 
 .submit-button {
-  // outline: none;
   text-align: center;
   padding: 30px;
 }
@@ -65,7 +64,21 @@ input[type=password] {
   text-align: center;
 }
 
+input[type=text] {
+  background-color: #d6d6d6;
+  color: white;
+  border-radius: 15px;
+  text-align: center;
+}
+
 input[type=email]:focus {
+  outline: none;
+  border: 2px solid #96C93D;
+  padding-left: 12px;
+  color: #000000;
+}
+
+input[type=text]:focus {
   outline: none;
   border: 2px solid #96C93D;
   padding-left: 12px;
@@ -92,6 +105,7 @@ input[type=submit]:focus {
   border-radius: 20px;
 }
 
+
 .zoom {
   transition: transform .2s;
 }
@@ -102,4 +116,12 @@ input[type=submit]:focus {
 
 .flash {
   text-align: center;
+}
+
+.find-location-button {
+  color: #96C93D;
+  background-color: #000000;
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
 }
