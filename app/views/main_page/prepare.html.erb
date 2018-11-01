@@ -98,11 +98,15 @@
           <%= password_field_tag(:cc_number) %>
           <%= label_tag(:credit_expiration, "Credit Card Expiration Date") %>
           <%= month_field(:cc_expiration_month, :cc_expires_year) %>
+          <%= hidden_field_tag :start_time %>
+          <%= hidden_field_tag :end_time %>
+
           <%= submit_tag("Finish") %>
         <% end %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= submit_tag("Finish") %>
         <button type="button" id="start_timer" class="btn btn-primary" onclick="stopTimer()">Save changes</button>
       </div>
     </div>
@@ -114,22 +118,12 @@
 </div>
 
 <script type="text/javascript">
-activateButtons(false, true);
 function startTimer() {
-  var seconds = 0;
-  timer = setInterval(function() {
-    seconds ++;
-    document.getElementById("seconds").innerText = seconds % 60;
-    document.getElementById("minutes").innerText = parseInt(seconds / 60);
-    activateButtons(true, false);
-  }, 1000);
+ var startTime = Date.now()
+      $("#start_time").val(startTime);
 }
 function stopTimer() {
-  clearInterval(timer);
-  activateButtons(false, true);
-}
-function activateButtons(start, stop) {
-  document.getElementById("start-button").disabled = start;
-  document.getElementById("stop-button").disabled = stop;
+  var endTime = Date.now()
+  $("#end_time").val(endTime)
 }
 </script>
