@@ -1,5 +1,6 @@
 class SessionController < ApplicationController
   def new
+    session[:user] = nil
   end
 
   def destroy
@@ -8,7 +9,6 @@ class SessionController < ApplicationController
   end
 
   def create
-    binding.pry
     check_login
     result = MembersService.new(params[:user][:address], params[:password])
     if result.success
